@@ -1,0 +1,3 @@
+#!/bin/bash
+g++ -c main.cpp entity.cpp 
+g++ main.o -o $1 -lsfml-graphics -lsfml-window -lsfml-system
