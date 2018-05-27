@@ -1,6 +1,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include "player.h"
+#include "entity.h"
 
 
 int main()
@@ -8,18 +10,10 @@ int main()
 
     using namespace sf;
 
-    float PlayerMovementSpeed = 0.20;
-    sf::RenderWindow window(sf::VideoMode(800,600),"Przygody Gabci");
-    int counterwalking = 0;
-    sf::Texture texturePlayer;
-    if(!texturePlayer.loadFromFile("sprite.png"))
-    {
-        return EXIT_FAILURE;
-    }
 
-    sf::Sprite spritePlayer(texturePlayer);
-    spritePlayer.setPosition(window.getSize().x/2,window.getSize().y/2);
-    spritePlayer.setTextureRect((sf::IntRect(256,128,64,64)));
+    sf::RenderWindow window(sf::VideoMode(800,600),"Przygody Gabci");
+
+    player Player1("sprite.png");
 
     while (window.isOpen())
     {
@@ -43,35 +37,10 @@ int main()
 
         window.clear(sf::Color::Black);
 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        {
-           spritePlayer.move(0,-PlayerMovementSpeed);
-           spritePlayer.setTextureRect((sf::IntRect(counterwalking *64,64*0,64,64)));
+        Player1.update();
+        Player1.updatemovement();
+        window.draw(Player1);
 
-        }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        {
-            spritePlayer.move(0,PlayerMovementSpeed);
-            spritePlayer.setTextureRect((sf::IntRect(counterwalking *64,64*2,64,64)));
-        }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        {
-            spritePlayer.move(PlayerMovementSpeed,0);
-            spritePlayer.setTextureRect((sf::IntRect(counterwalking *64,64*3,64,64)));
-        }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        {
-            spritePlayer.move(-PlayerMovementSpeed,0);
-            spritePlayer.setTextureRect((sf::IntRect(counterwalking *64,64*1,64,64)));
-        }
-
-        counterwalking++;
-        if(counterwalking==9)
-        {
-            counterwalking=0;
-        }
-
-        window.draw(spritePlayer);
         window.display();
 
 

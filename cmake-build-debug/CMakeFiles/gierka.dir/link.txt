@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/gierka.dir/main.cpp.o CMakeFiles/gierka.dir/player.cpp.o  -o gierka 
